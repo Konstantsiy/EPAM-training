@@ -7,7 +7,7 @@ public class Time {
 
     public Time() {};
 
-    public Time(int seconds) {
+    public Time(int seconds){
         if (seconds < 0) {
 //            throw new DateTimeException("Parameters must be positive!");
         }

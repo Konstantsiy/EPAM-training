@@ -5,7 +5,7 @@ import com.epam.tasks.task2.entity.CustomDate;
 public class DateService {
 
     public int determineDaysNumber(CustomDate date) {
-        switch(date.getMonths()){
+        switch(date.getMonths()) {
             case 1:
             case 3:
             case 5:

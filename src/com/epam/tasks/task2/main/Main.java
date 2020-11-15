@@ -16,6 +16,5 @@ public class Main {
         date2.setDays(days2);
         Report report = new Report();
         report.getReport(date1);
-        report.getReport(date2);
     }
 }

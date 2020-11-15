@@ -7,7 +7,7 @@ import com.epam.tasks.task3.service.FigureService;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Square square = new Square(4);
         Circle innerCircle = new Circle();
         FigureService figureService = new FigureService();

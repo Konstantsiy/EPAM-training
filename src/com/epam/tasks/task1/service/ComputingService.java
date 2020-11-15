@@ -2,11 +2,11 @@ package com.epam.tasks.task1.service;
 
 public class ComputingService {
 
-    public int determineLastSquareDigit(int n) {
-        if(Math.abs(n) >= 10) {
-            n %= 10;
+    public int determineLastSquareDigit(int number) {
+        if(Math.abs(number) >= 10) {
+            number %= 10;
         }
-        switch(Math.abs(n)){
+        switch(Math.abs(number)){
             case 1:
             case 9: return 1;
             case 2:

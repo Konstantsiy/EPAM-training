@@ -12,15 +12,15 @@ public class CustomReader {
 
     public int inputNaturalNumber() {
         boolean flag;
-        int n;
+        int number;
         do{
             flag = true;
-            n = scanner.nextInt();
-            if(!scanner.hasNextInt() || n <= 0) {
+            number = scanner.nextInt();
+            if(!scanner.hasNextInt() || number <= 0) {
                 System.out.println("Positive integer number please!");
                 flag = false;
             }
         } while (!flag);
-        return n;
+        return number;
     }
 }

@@ -2,7 +2,7 @@ package com.epam.tasks.task6.service;
 
 import com.epam.tasks.task6.entity.Time;
 
-public class TimeService {
+public class TimeService  {
 
     public Time convertSeconds(int seconds) {
         Time time = new Time();

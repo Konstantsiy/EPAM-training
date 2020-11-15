@@ -6,9 +6,9 @@ public abstract class Figure {
     protected Figure() {}
 
     protected Figure(double area) {
-        if(area < 0) {
-//            throw new FigureException("Figure area must be positive!");
-        }
+//        if(area < 0) {
+////            throw new FigureException("Figure area must be positive!");
+//        }
         this.area = area;
     }
 

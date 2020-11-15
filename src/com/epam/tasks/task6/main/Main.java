@@ -5,7 +5,7 @@ import com.epam.tasks.task6.entity.Time;
 import com.epam.tasks.task6.report.Report;
 import com.epam.tasks.task6.service.TimeService;
 
-public class Main {
+public class Main{
 
     public static void main(String[] args) {
         CustomReader reader = new CustomReader();

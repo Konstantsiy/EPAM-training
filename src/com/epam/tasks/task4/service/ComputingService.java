@@ -2,7 +2,7 @@ package com.epam.tasks.task4.service;
 
 import com.epam.tasks.task4.entity.NumbersSet;
 
-public class ComputingService {
+public class ComputingService{
 
     public boolean checkSet(NumbersSet set) {
         int count = 0;

@@ -6,9 +6,9 @@ public class CustomDate {
     private int days;
 
     public CustomDate(int month, int year) {
-        if(year <= 0 || month <= 0 || month > 12) {
-//            throw new DateTimeException("Parameters must be positive");
-        }
+//        if(year <= 0 || month <= 0 || month > 12) {
+////            throw new DateTimeException("Parameters must be positive");
+//        }
         this.years = year;
         this.months = month;
         this.days = 0;

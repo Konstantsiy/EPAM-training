@@ -13,7 +13,7 @@ public class Circle extends Figure {
     }
 
 
-    public double getRadius() {
+    public double getRadius()  {
         return radius;
     }
 

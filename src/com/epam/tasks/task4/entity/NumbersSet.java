@@ -6,7 +6,7 @@ public class NumbersSet {
     private int[] ms;
     private boolean flag;
 
-    public NumbersSet(int border) {
+    public NumbersSet(int border)  {
         this.flag = false;
         ms = new int[4];
         for(int i = 0; i < ms.length; i++) {

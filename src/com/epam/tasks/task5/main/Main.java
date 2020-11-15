@@ -9,7 +9,7 @@ public class Main {
         CustomReader reader = new CustomReader();
         ComputingService computingService = new ComputingService();
         System.out.print("Enter number: ");
-        int number = reader.inputNaturalNumber();
-        System.out.println(computingService.isPerfect(number));
+        int n = reader.inputNaturalNumber();
+        System.out.println(computingService.isPerfect(n));
     }
 }
