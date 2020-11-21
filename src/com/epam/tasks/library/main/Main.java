@@ -1,78 +1,35 @@
 package com.epam.tasks.library.main;
 
-import com.epam.tasks.library.entity.Author;
-import com.epam.tasks.library.entity.Book;
-import com.epam.tasks.library.entity.Genre;
-import com.epam.tasks.library.exception.BookCacheException;
-import com.epam.tasks.library.service.AuthorService;
-import com.epam.tasks.library.service.BookService;
-import com.epam.tasks.library.utils.Reader;
 
-import java.util.ArrayList;
+import com.epam.tasks.library.entity.*;
+import com.epam.tasks.library.exception.BookServiceException;
+import com.epam.tasks.library.exception.IncorrectParameterException;
+import com.epam.tasks.library.reporter.LibraryReporter;
+import com.epam.tasks.library.service.BookService;
+
+import java.util.List;
 
 public class Main {
-
-    public static Reader reader = new Reader();
-    public static BookService bookService = new BookService();
-    public static AuthorService authorService = new AuthorService();
-
     public static void main(String[] args) {
-        Reader reader = new Reader();
-        boolean flag = true;
-        while(flag) {
-            menu();
-            int op = reader.readOption(0, 4);
-            switch (op) {
-                case 1 -> addNewBook();
-                case 2 -> viewBooksBuAuthor();
-                case 3 -> viewBooksByPublishingYear();
-                case 4 -> viewBooksByGenre();
-                case 0 -> flag = false;
-            }
-        }
 
-    }
-
-    public static void menu() {
-        System.out.println("1. Add book.\n");
-        System.out.println("2. View books by author.\n");
-        System.out.println("3. View books by publishing year.\n");
-        System.out.println("4. View books by genre.\n");
-        System.out.println("0. Out.");
-        System.out.print("> ");
-    }
-
-
-    public static void addNewBook() {
-        Book newBook = reader.readBook();
         try {
-            bookService.addNewBook(newBook);
-            authorService.addAuthorsFromBook(newBook);
-        } catch (BookCacheException e) {
-            System.out.print(e.getErrorMessage());
+            Publisher p1 = new Publisher("Seeking House Peter");
+            Publisher p2 = new Publisher("INSPIRIA");
+
+            Author a2 = new Author("Ernest", "Hemingway");
+            Author a1 = new Author("Stephen", "King");
+
+            Book book1 = new Book("IT", 1987, 25.29, 230, Cover.HARD, p1, new Author[]{a1}, new Genre[]{Genre.FANTASY, Genre.HORROR, Genre.THRILLER});
+            Book book2 = new Book("The old man and the sea", 1967, 30.29, 450, Cover.HARD, p2, new Author[]{a2}, new Genre[]{Genre.CLASSIC, Genre.THRILLER});
+
+            Book[] books = {book1, book2};
+            BookService bookService = new BookService();
+            LibraryReporter libraryReporter = new LibraryReporter();
+
+            List<Book> neededBook = bookService.getBookByGenre(books, Genre.THRILLER);
+            libraryReporter.report(neededBook);
+        } catch (BookServiceException | IncorrectParameterException e) {
+            System.out.print(e.getMessage());
         }
     }
-
-    public static void viewBooksBuAuthor() {
-        System.out.println("Enter info about author: ");
-        Author author = reader.readAuthor();
-        ArrayList<Book> neededBooks = bookService.findByAuthor(author);
-        System.out.println(neededBooks.toString());
-    }
-
-    public static void viewBooksByPublishingYear() {
-        System.out.println("Enter year: ");
-        int year = reader.readPositiveNumber();
-        ArrayList<Book> neededBooks = bookService.findByPublishingYear(year);
-        System.out.println(neededBooks.toString());
-    }
-
-    public static void viewBooksByGenre() {
-        System.out.print("Enter genre title: ");
-        Genre genre = reader.readGenre();
-        ArrayList<Book> neededBooks = bookService.findByGenre(genre);
-        System.out.println(neededBooks.toString());
-    }
-
-
 }

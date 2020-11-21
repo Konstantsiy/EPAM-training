@@ -1,34 +1,27 @@
 package com.epam.tasks.library.entity;
 
-import java.util.Objects;
+public enum Genre {
+    DETECTIVE ("Detective"),
+    FICTION ("Fiction"),
+    FANTASY ("Fantasy"),
+    THRILLER ("Thriller"),
+    HORROR ("Horror"),
+    ADVENTURE ("Adventure"),
+    EROTIC ("Erotic"),
+    CLASSIC ("Classic");
 
-public class Genre {
-    private String genreTitle;
+    private final String title;
 
-    public Genre(String genreTitle) {
-        this.genreTitle = genreTitle;
+    Genre(String s) {
+        this.title = s;
     }
 
-    public String getGenreTitle() {
-        return genreTitle;
-    }
-
-    public void setGenreTitle(String genreTitle) {
-        this.genreTitle = genreTitle;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Genre genre = (Genre) o;
-        return genreTitle.equals(genre.genreTitle);
+    public String getTitle() {
+        return title;
     }
 
     @Override
     public String toString() {
-        return "Genre{" +
-                "genreTitle='" + genreTitle + '\'' +
-                '}';
+        return title;
     }
 }

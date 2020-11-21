@@ -1,31 +1,29 @@
 package com.epam.tasks.library.entity;
 
-import java.util.ArrayList;
-import java.util.Objects;
+
+import com.epam.tasks.library.exception.IncorrectParameterException;
 
 public class Publisher {
     private String title;
-    ArrayList<Book> releasedBooks;
 
-    public Publisher(String title, ArrayList<Book> releasedBooks) {
-        this.title = title;
-        this.releasedBooks = releasedBooks;
+    public Publisher(String title) throws IncorrectParameterException {
+        if(!title.isBlank()) {
+            this.title = title;
+        } else {
+            throw new IncorrectParameterException("Publisher title cannot be empty");
+        }
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public ArrayList<Book> getReleasedBooks() {
-        return releasedBooks;
-    }
-
-    public void setReleasedBooks(ArrayList<Book> releasedBooks) {
-        this.releasedBooks = releasedBooks;
+    public void setTitle(String title) throws IncorrectParameterException {
+        if(!title.isBlank()) {
+            this.title = title;
+        } else {
+            throw new IncorrectParameterException("Publisher title cannot be empty");
+        }
     }
 
     @Override
@@ -33,7 +31,11 @@ public class Publisher {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Publisher publisher = (Publisher) o;
-        return title.equals(title) &&
-                releasedBooks.equals(publisher.getReleasedBooks());
+        return title.equals(publisher.title);
+    }
+
+    @Override
+    public String toString() {
+        return title;
     }
 }

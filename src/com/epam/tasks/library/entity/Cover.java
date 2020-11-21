@@ -18,19 +18,8 @@ public enum Cover {
         return title;
     }
 
-    public static boolean check(String s) {
-        for(Cover cover : values()) {
-            if(s.equals(cover.getTitle())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public String toString() {
-        return "Cover{" +
-                "title='" + title + '\'' +
-                '}';
+        return title;
     }
 }

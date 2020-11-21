@@ -1,58 +1,76 @@
 package com.epam.tasks.library.service;
 
-import com.epam.tasks.library.cache.BookCache;
+
 import com.epam.tasks.library.entity.Author;
 import com.epam.tasks.library.entity.Book;
 import com.epam.tasks.library.entity.Genre;
-import com.epam.tasks.library.exception.BookCacheException;
+import com.epam.tasks.library.entity.Publisher;
+import com.epam.tasks.library.exception.BookServiceException;
 
-import java.util.ArrayList;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookService {
 
-    private final BookCache bookCache;
+   public BookService(){}
 
-    public BookService(){
-        bookCache = new BookCache();
-    }
+    public List<Book> getBookByAuthor(Book[] books, Author author) throws BookServiceException {
+        List<Book> neededBooks = Arrays.stream(books)
+                .filter(book -> Arrays.asList(book.getAuthors()).contains(author))
+                .collect(Collectors.toList());
 
-    public void addNewBook(Book book) throws BookCacheException {
-        if(bookCache.contains(book)) {
-            throw new BookCacheException("This book is already exist in cache.");
-        } else {
-            bookCache.add(book);
-
-        }
-    }
-
-    public ArrayList<Book> findByAuthor(Author author) {
-        ArrayList<Book> neededBooks = new ArrayList<>();
-        for(Book book : bookCache.getExistingBooks()) {
-            if(book.getAuthors().contains(author)) {
-                neededBooks.add(book);
-            }
+        if(neededBooks.isEmpty()) {
+            throw new BookServiceException("There are no books with author " + author);
         }
         return neededBooks;
     }
 
-    public ArrayList<Book> findByPublishingYear(int year) {
-        ArrayList<Book> neededBooks = new ArrayList<>();
-        for(Book book : bookCache.getExistingBooks()) {
-            if(year == book.getYear()) {
-                neededBooks.add(book);
-            }
-        }
-        return neededBooks;
+    public List<Book> getBookByGenre(Book[] books, Genre genre) throws BookServiceException {
+       List<Book> neededBooks = Arrays.stream(books)
+               .filter(book -> Arrays.asList(book.getGenres()).contains(genre))
+               .collect(Collectors.toList());
+
+       if(neededBooks.isEmpty()) {
+           throw new BookServiceException("There are no books with genre " + genre);
+       }
+       return neededBooks;
     }
 
-    public ArrayList<Book> findByGenre(Genre genre) {
-        ArrayList<Book> neededBooks = new ArrayList<>();
-        for(Book book : bookCache.getExistingBooks()) {
-            if(book.getGenres().contains(genre)) {
-                neededBooks.add(book);
-            }
-        }
-        return neededBooks;
+    public List<Book> getBooksAfterYear(Book[] books, int year) throws BookServiceException {
+       List<Book> neededBooks = Arrays.stream(books)
+               .filter(book -> book.getYear() > year)
+               .collect(Collectors.toList());
+
+       if(neededBooks.isEmpty()) {
+           throw new BookServiceException("There are no books after " + year);
+       }
+       return neededBooks;
+    }
+
+    public List<Book> getBooksByPublisher(Book[] books, Publisher publisher) throws BookServiceException {
+       List<Book> neededBooks =  Arrays.stream(books)
+               .filter(book -> book.getPublisher().equals(publisher))
+               .collect(Collectors.toList());
+
+       if(neededBooks.isEmpty()) {
+           throw new BookServiceException("There are no books with publisher " + publisher);
+       }
+       return neededBooks;
+    }
+
+    public Book getCheapestBook(Book[] books) throws BookServiceException {
+        return Arrays.stream(books)
+                .min(Comparator.comparing(Book::getPrice))
+                .orElseThrow(() -> new BookServiceException("The most cheapest book not found"));
+    }
+
+    public Book getMostExpensiveBook(Book[] books) throws BookServiceException {
+       return Arrays.stream(books)
+               .max(Comparator.comparing(Book::getPrice))
+               .orElseThrow(() -> new BookServiceException("The most expensive book not found"));
     }
 
 }
