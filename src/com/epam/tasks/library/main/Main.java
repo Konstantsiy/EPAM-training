@@ -26,7 +26,7 @@ public class Main {
             BookService bookService = new BookService();
             LibraryReporter libraryReporter = new LibraryReporter();
 
-            List<Book> neededBook = bookService.getBookByGenre(books, Genre.THRILLER);
+            Book[] neededBook = bookService.getBookByGenre(books, Genre.THRILLER);
             libraryReporter.report(neededBook);
         } catch (BookServiceException | IncorrectParameterException e) {
             System.out.print(e.getMessage());

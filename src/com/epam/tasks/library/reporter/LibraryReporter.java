@@ -8,7 +8,7 @@ public class LibraryReporter {
 
     public LibraryReporter(){}
 
-    public void report(List<Book> books) {
+    public void report(Book[] books) {
         for(Book book : books) {
             System.out.println(book);
         }

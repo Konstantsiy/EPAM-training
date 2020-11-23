@@ -1,0 +1,35 @@
+Configutation:
+  name: Default
+
+  Properties:
+    Property:
+      name: log-path
+      value: "logs"
+
+  Appenders:
+
+    Console:
+      name: Console_Appender
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{20} - %msg%n"
+
+    File:
+      name: File_Appender
+      fileName: logs/logfile.log
+      PatternLayout:
+        pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{20} - %msg%n"
+
+  Loggers:
+
+    Logger:
+      name: ConsoleLogger
+      level: info
+      AppenderRef:
+        -ref: Console_Appender
+
+    Root:
+      level: debug
+      AppenderRef:
+        - ref: Console_Appender
+        - ref: File_Appender

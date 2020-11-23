@@ -66,8 +66,8 @@ public class LibraryServiceTest {
     @Test
     public void testGetBookByAuthor() {
         try {
-            Assert.assertEquals(bookService.getBookByAuthor(books, authors[1]).size(), 2);
-            Assert.assertEquals(bookService.getBookByAuthor(books, authors[0]).size(), 1);
+            Assert.assertEquals(bookService.getBookByAuthor(books, authors[1]).length, 2);
+            Assert.assertEquals(bookService.getBookByAuthor(books, authors[0]).length, 1);
         } catch (BookServiceException e) {
             e.printStackTrace();
         }
@@ -76,8 +76,8 @@ public class LibraryServiceTest {
     @Test
     public void testGetBookByGenre() {
         try {
-            Assert.assertEquals(bookService.getBookByGenre(books, Genre.HORROR).size(), 2);
-            Assert.assertEquals(bookService.getBookByGenre(books, Genre.ADVENTURE).size(), 1);
+            Assert.assertEquals(bookService.getBookByGenre(books, Genre.HORROR).length, 2);
+            Assert.assertEquals(bookService.getBookByGenre(books, Genre.ADVENTURE).length, 1);
         } catch (BookServiceException e) {
             e.printStackTrace();
         }
@@ -86,8 +86,8 @@ public class LibraryServiceTest {
     @Test
     public void testGetBooksAfterYear() {
         try {
-            Assert.assertEquals(bookService.getBooksAfterYear(books, 1900).size(), 4);
-            Assert.assertEquals(bookService.getBooksAfterYear(books, 1960).size(), 3);
+            Assert.assertEquals(bookService.getBooksAfterYear(books, 1900).length, 4);
+            Assert.assertEquals(bookService.getBooksAfterYear(books, 1960).length, 3);
         } catch (BookServiceException e) {
             e.printStackTrace();
         }
@@ -96,7 +96,7 @@ public class LibraryServiceTest {
     @Test
     public void testGetBooksByPublisher() {
         try {
-            Assert.assertEquals(bookService.getBooksByPublisher(books, publishers[0]).size(), 1);
+            Assert.assertEquals(bookService.getBooksByPublisher(books, publishers[0]).length, 1);
         } catch (BookServiceException e) {
             e.printStackTrace();
         }
